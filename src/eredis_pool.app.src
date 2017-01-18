@@ -9,17 +9,4 @@
                  ]},
   {mod, { eredis_pool_app, []}},
   {env, [{pools, []}, {global_or_local, local}]}
-
-%% sample configuration.
-%%
-%%  {env, [
-%%          {pools, [
-%%                   {dbsrv, [
-%%                              {size, 10},
-%%                              {max_overflow, 30}
-%%                             ]}
-%%	          ]}
-%%        ]}
-%%
-
 ]}.
