@@ -24,7 +24,7 @@
 
 -define(SERVER, ?MODULE).
 
--compile({parse_transform, lager_transform}).
+% -compile({parse_transform, lager_transform}).
 
 -record(state, {
     connect_args,
@@ -127,11 +127,11 @@ handle_cast(_Request, State) ->
     {noreply, NewState :: #state{}, timeout() | hibernate} |
     {stop, Reason :: term(), NewState :: #state{}}).
 handle_info({'EXIT', Pid, _}, State=#state{pid=Pid}) ->
-    lager:debug("eredis_proxy recv Pid ~p~n", [Pid]),
+    % lager:debug("eredis_proxy recv Pid ~p~n", [Pid]),
     {noreply, State#state{pid=undefined}};
 
 handle_info(_Info, State) ->
-    lager:debug("eredis_proxy recv unknow ~p~n", [_Info]),
+    % lager:debug("eredis_proxy recv unknow ~p~n", [_Info]),
     {noreply, State}.
 
 %%--------------------------------------------------------------------
@@ -147,8 +147,8 @@ handle_info(_Info, State) ->
 %%--------------------------------------------------------------------
 -spec(terminate(Reason :: (normal | shutdown | {shutdown, term()} | term()),
     State :: #state{}) -> term()).
-terminate(Reason, #state{pid = undefined}) ->
-    lager:critical("eredis_proxy terminate ~p~n", [Reason]),
+terminate(_Reason, #state{pid = undefined}) ->
+    % lager:critical("eredis_proxy terminate ~p~n", [Reason]),
     ok;
 
 terminate(_Reason, #state{pid = Pid}) ->
